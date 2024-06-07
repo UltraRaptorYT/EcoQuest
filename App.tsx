@@ -1,11 +1,15 @@
 import React from "react";
 import {
-   Button,   View,
-   StyleSheet,
-   SafeAreaView,
+  Button,
+  View,
+  StyleSheet,
+  SafeAreaView,
 } from "react-native";
-import {  Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+import { Amplify } from "aws-amplify";
+import {
+  Authenticator,
+  useAuthenticator,
+} from "@aws-amplify/ui-react-native";
 import outputs from "./amplify_outputs.json";
 
 Amplify.configure(outputs);
