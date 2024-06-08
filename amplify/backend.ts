@@ -1,11 +1,23 @@
-import { defineBackend } from '@aws-amplify/backend';
-import { auth } from './auth/resource';
-import { data } from './data/resource';
+import { Stack } from "aws-cdk-lib/core"
+import { EmailIdentity } from "aws-cdk-lib/aws-ses"
+import { defineBackend } from "@aws-amplify/backend"
+import { auth } from "./auth/resource"
 
-/**
- * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
- */
-defineBackend({
+const backend = defineBackend({
   auth,
-  data,
-});
+})
+
+const { cfnUserPool } = backend.auth.resources.cfnResources
+const authStack = Stack.of(cfnUserPool)
+
+const email = EmailIdentity.fromEmailIdentityName(
+  authStack,
+  "EmailIdentity",
+  // your email configured for use in SES
+  process.env.EMAIL || ""
+)
+
+cfnUserPool.emailConfiguration = {
+  emailSendingAccount: "DEVELOPER",
+  sourceArn: email.emailIdentityArn,
+}
