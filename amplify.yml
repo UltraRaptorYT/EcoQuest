@@ -12,6 +12,9 @@ frontend:
           else
             npm install
           fi
+    amplify:
+      commands:
+        - npx ampx sandbox
     build:
       commands:
         - expo build:web
