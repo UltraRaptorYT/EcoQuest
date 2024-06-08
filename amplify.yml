@@ -14,7 +14,7 @@ frontend:
           fi
     build:
       commands:
-        - amplify pull --sandboxId $SANDBOX_ID --appId $APP_ID
+        - npx ampx pipeline-deploy --branch main --app-id $APP_ID
         - expo build:web
   artifacts:
     baseDirectory: web-build
