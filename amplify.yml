@@ -15,7 +15,7 @@ frontend:
     build:
       commands:
         - npx ampx pipeline-deploy --branch main --app-id $APP_ID
-        - npx ampx generate outputs --branch main --app-id $APP_ID
+        # - npx ampx generate outputs --branch main --app-id $APP_ID
         - expo build:web
   artifacts:
     baseDirectory: web-build
