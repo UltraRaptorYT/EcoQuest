@@ -12,11 +12,9 @@ frontend:
           else
             npm install
           fi
-    amplify:
-      commands:
-        - npx ampx sandbox
     build:
       commands:
+        - amplify pull --sandboxId $SANDBOX_ID --appId $APP_ID
         - expo build:web
   artifacts:
     baseDirectory: web-build
