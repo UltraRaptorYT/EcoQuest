@@ -34,14 +34,14 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-android
-
 
 # amplify
 node_modules
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+.env
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

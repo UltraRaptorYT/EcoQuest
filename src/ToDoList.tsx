@@ -48,7 +48,9 @@ const TodoList = () => {
         data={todos}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={() => <View style={styles.listItemSeparator} />}
+        ItemSeparatorComponent={() => (
+          <View style={styles.listItemSeparator} />
+        )}
         ListEmptyComponent={() => <Text>The todo list is empty.</Text>}
         style={styles.listContainer}
       ></FlatList>
@@ -89,7 +91,7 @@ const TodoItem = (todo: Schema["Todo"]["type"]) => (
 const styles = StyleSheet.create({
   todoItemContainer: { flexDirection: "row", alignItems: "center", padding: 8 },
   todoItemText: { flex: 1, textAlign: "center" },
-  listContainer: { flex: 1, alignSelf: "stretch", padding: 8 },
+  listContainer: { flex: 1, alignSelf: "stretch", padding:8 },
   listItemSeparator: { backgroundColor: "lightgrey", height: 2 },
 });
 
