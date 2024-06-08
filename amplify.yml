@@ -1,6 +1,17 @@
 version: 1.0
 backend:
   phases:
+    preBuild:
+      commands:
+        - npm install --quiet --global expo-cli
+        - >
+          if [ -f yarn.lock ]; then
+            yarn
+          elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            npm ci
+          else
+            npm install
+          fi
     build:
       commands:
         - npx ampx pipeline-deploy --branch main --app-id $APP_ID
