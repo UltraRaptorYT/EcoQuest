@@ -1,20 +1,49 @@
-import { Button, View, StyleSheet, Text } from "react-native";
+import { useState } from "react";
+import {
+  Button,
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Dimensions,
+} from "react-native";
+import { useAuthenticator } from "@aws-amplify/ui-react-native";
 
 type PostType = {
   img: string;
-  heart: string;
+  caption: string;
 };
 
-export const Post = ({ img }: PostType) => {
+export default function Post({ img, caption }: PostType) {
+  const { user } = useAuthenticator((context) => [context.user]);
+  console.log(user)
+  const [imageHeight, setImageHeight] = useState<number | null>(null);
+
+  Image.getSize(img, (width, height) => {
+    const aspectRatio = width / height;
+    const screenWidth = Dimensions.get("window").width;
+    const calculatedHeight = screenWidth / aspectRatio;
+    setImageHeight(calculatedHeight);
+  });
+
   return (
-    <View style={styles.signOutButton}>
-      <Text>{img}</Text>
+    <View style={styles.post}>
+      <Image
+        source={{ uri: img }}
+        style={[styles.image, { height: imageHeight }]}
+      />
+      <Text>{caption}</Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  signOutButton: {
-    alignSelf: "flex-end",
+  post: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: {
+    width: "100%",
+    height: "auto",
   },
 });

@@ -4,9 +4,9 @@ import { Authenticator } from "@aws-amplify/ui-react-native";
 
 import outputs from "./amplify_outputs.json";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import HomeScreen from "./src/pages/HomeScreen";
 import MarketPlaceScreen from "./src/pages/MarketPlaceScreen";
@@ -21,26 +21,45 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <Authenticator.Provider>
-      <Authenticator>
+      <Authenticator
+        signUpAttributes={["nickname", "preferred_username", "picture"]}
+        components={{
+          SignUp: ({ fields, ...props }) => (
+            <Authenticator.SignUp
+              {...props}
+              fields={[
+                {
+                  name: "username",
+                  label: "Username",
+                  type: "default",
+                  placeholder: "Enter your Username",
+                },
+                ...fields,
+              ]}
+            />
+          ),
+        }}
+      >
         <NavigationContainer>
           <Tab.Navigator
             initialRouteName="Home"
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
-
                 let routeIcons = {
-                  "Home": "home",
-                  "MarketPlace": "shopping-cart",
-                  "Recycle": "recycle",
-                  "Quest": "leaf",
-                  "Profile": "user"
-                }
-                let iconName = routeIcons[route.name]
+                  Home: "home",
+                  MarketPlace: "shopping-cart",
+                  Recycle: "recycle",
+                  Quest: "leaf",
+                  Profile: "user",
+                };
+                let iconName = routeIcons[route.name];
 
-                return <FontAwesome name={iconName} size={size + 4} color={color} />;
+                return (
+                  <FontAwesome name={iconName} size={size + 4} color={color} />
+                );
               },
-              tabBarActiveTintColor: '#48742C',
-              tabBarInactiveTintColor: '#ccc',
+              tabBarActiveTintColor: "#48742C",
+              tabBarInactiveTintColor: "#ccc",
               headerShown: false,
               tabBarLabel: () => null,
             })}
