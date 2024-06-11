@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function MarketPlaceScreen() {
+export default function CreatePostScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.heading}>EcoQuest</Text>
       </View>
-      <Text>MarketPlacePage</Text>
+      <Text>CreatePostPage</Text>
     </View>
   );
 }

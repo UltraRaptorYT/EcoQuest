@@ -1,7 +1,9 @@
 export type RootStackParamList = {
   Welcome: undefined;
   BottomBar: undefined;
+  CreatePost: undefined;
 };
+
 
 export type FontAwesomeIconName =
   | "link"

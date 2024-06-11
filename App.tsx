@@ -11,6 +11,7 @@ import MarketPlaceScreen from "./src/pages/MarketPlaceScreen";
 import QuestScreen from "./src/pages/QuestScreen";
 import ProfileScreen from "./src/pages/ProfileScreen";
 import RecycleScreen from "./src/pages/RecycleScreen";
+import CreatePostScreen from "./src/pages/Post/CreatePostScreen";
 
 import { UserProvider } from "./src/context/UserContext";
 
@@ -58,6 +59,7 @@ export default function App() {
         >
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="BottomBar" component={TabNavigator} />
+          <Stack.Screen name="CreatePost" component={CreatePostScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

@@ -8,8 +8,8 @@ type WelcomeScreenProps = StackScreenProps<RootStackParamList, "Welcome">;
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>asda</Text>
-      <Button title="test" onPress={() => navigation.navigate("BottomBar")} />
+      <Text>EcoQuest</Text>
+      <Button title="Login" onPress={() => navigation.navigate("BottomBar")} />
     </SafeAreaView>
   );
 };

@@ -1,7 +1,18 @@
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  Pressable,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 import supabase from "../utils/supabase";
 import Post from "../components/Post";
+import { FontAwesome } from "@expo/vector-icons";
+import { RootStackParamList } from "../utils/types";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 type PostType = {
   id: number;
@@ -11,7 +22,10 @@ type PostType = {
   created_at: string;
 };
 
-export default function HomeScreen() {
+const HomeScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const [modalVisible, setModalVisible] = useState(false);
   const [posts, setPosts] = useState<PostType[]>();
 
   useEffect(() => {
@@ -30,6 +44,38 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.heading}>EcoQuest</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+            // navigation.navigate("Quest");
+            // navigation.navigate("CreatePost");
+          }}
+        >
+          <FontAwesome name="plus-square-o" size={26} color="black" />
+        </TouchableOpacity>
+      </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.postContainer}>
         {posts?.map((e, i) => {
           return <Post img={e.img} caption={e.caption} key={`Post${i}`}></Post>;
@@ -37,7 +83,7 @@ export default function HomeScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,4 +94,60 @@ const styles = StyleSheet.create({
     minWidth: 300,
   },
   postContainer: {},
+  header: {
+    display: "flex",
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  heading: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+
+  // Modal
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
 });
+
+export default HomeScreen;
