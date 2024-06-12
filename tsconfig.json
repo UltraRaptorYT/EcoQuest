@@ -4,11 +4,11 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
+    "isolatedModules": false, // Changed from true to false
     "jsx": "react-native",
     "lib": ["es6"],
     "moduleResolution": "node",
-    "noEmit": true,
+    "noEmit": false, // Changed from true to false
     "strict": true,
     "target": "es2017"
   },

@@ -105,20 +105,24 @@ const HomeScreen = () => {
   }, []);
 
   async function createPost() {
-    if (image?.startsWith("data")) {
-      let file = await uriToBlob(image);
-
-      let filePath = `${String(new Date().getTime())}_${"sad.jpeg"}`;
-      const { data, error } = await supabase.storage
-        .from("ecoquest")
-        .upload(filePath, file);
-      if (error) {
-        return console.log(error);
-      }
+    if (!image?.startsWith("data")) {
+      return;
     }
-    console.log(image);
+    let file = await uriToBlob(image);
+
+    let filePath = `${String(new Date().getTime())}_${"sad.jpeg"}`;
+    const { data, error } = await supabase.storage
+      .from("ecoquest")
+      .upload(filePath, file);
+    if (error) {
+      return console.log(error);
+    }
+
+    console.log(image, data);
     console.log(userContext?.user);
-    // supabase.from("ecoquest_post").insert({});
+    // supabase.from("ecoquest_post").insert({
+    //   img:
+    // });
     return;
   }
 
@@ -193,8 +197,11 @@ const styles = StyleSheet.create({
     marginTop: 22,
     maxWidth: 500,
     minWidth: 300,
+    width: "100%",
   },
-  postContainer: {},
+  postContainer: {
+    width: "100%",
+  },
   header: {
     display: "flex",
     padding: 10,
@@ -217,6 +224,7 @@ const styles = StyleSheet.create({
     // borderRadius: 20,
     padding: 35,
     alignItems: "center",
+    height: "100%",
     // shadowColor: "#000",
     // shadowOffset: {
     //   width: 0,
