@@ -103,7 +103,8 @@ export default function SignUpScreen() {
       username.trim() !== "" &&
       name.trim() !== "" &&
       confirmPassword.trim() !== "" &&
-      isPasswordMatch
+      isPasswordMatch &&
+      error == ""
     ) {
       try {
         const userinfo = await createUser(username, name, email, password);
@@ -118,6 +119,13 @@ export default function SignUpScreen() {
             `duplicate key value violates unique constraint "ecoquest_user_email_key"`
         ) {
           setError("Email already exist");
+        } else if (
+          error &&
+          (error as Error).message &&
+          (error as Error).message ==
+            `duplicate key value violates unique constraint "ecoquest_user_username_key"`
+        ) {
+          setError("Username already exist");
         } else {
           setError((error as Error).message);
         }
