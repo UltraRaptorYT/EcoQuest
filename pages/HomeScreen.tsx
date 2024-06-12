@@ -192,6 +192,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flex: 1,
     display: "flex",
     marginTop: 22,
@@ -219,19 +220,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalView: {
-    // margin: 20,
     backgroundColor: "white",
-    // borderRadius: 20,
     padding: 35,
     alignItems: "center",
     height: "100%",
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
     elevation: 5,
   },
   button: {
@@ -258,7 +250,8 @@ const styles = StyleSheet.create({
     width: 200,
     aspectRatio: 1,
     height: 200,
-    margin: "auto",
+    marginRight: "auto",
+    marginLeft: "auto",
   },
   closeButton: {
     alignSelf: "flex-start",

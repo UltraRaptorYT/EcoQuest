@@ -56,8 +56,8 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator
-          // initialRouteName="Welcome"
-          initialRouteName="BottomBar"
+          initialRouteName="Welcome"
+          // initialRouteName="BottomBar"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Welcome" component={WelcomeScreen} />

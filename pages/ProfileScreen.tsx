@@ -14,7 +14,7 @@ export default function ProfileScreen() {
       <View style={styles.header}>
         <Text style={styles.heading}>EcoQuest</Text>
       </View>
-      <Text>ProfilePage </Text>
+      <Text>Hi {JSON.stringify(userContext?.user)},</Text>
       <Button
         title="Sign Out"
         onPress={() => {
@@ -28,6 +28,7 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flex: 1,
     display: "flex",
     marginTop: 22,
