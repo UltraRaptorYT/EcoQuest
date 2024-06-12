@@ -47,10 +47,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     display: "flex",
-    marginTop: 22,
+    marginTop: 26,
     maxWidth: 500,
     minWidth: 300,
   },
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     marginTop: "auto",
     marginBottom: 100,
     display: "flex",
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     textAlign: "center",
-    color: "white",
+    color: "#f2f2f2",
   },
   titleContainer: {
     backgroundColor: "#1DD1A1",
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 150, // Height of the triangle
     borderTopColor: "transparent",
     borderRightWidth: 500, // Width of the triangle
-    borderRightColor: "white", // Color of the triangle
+    borderRightColor: "#f2f2f2", // Color of the triangle
     borderStyle: "solid", // Style of the border
     backgroundColor: "transparent", // Set the background color to transparent
   },

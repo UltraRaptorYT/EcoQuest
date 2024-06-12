@@ -30,13 +30,13 @@ const ProgressLine = ({ progress }: { progress: number }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
   },
   linecontainer: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     height: 3,
     borderRadius: 5,

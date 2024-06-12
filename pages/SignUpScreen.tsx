@@ -91,7 +91,6 @@ export default function SignUpScreen() {
     if (data && "error" in data) {
       throw new Error(data.error);
     }
-    console.log(data);
     if (data.length == 0) {
       throw new Error("Internal Server Error");
     }
@@ -114,7 +113,7 @@ export default function SignUpScreen() {
         userContext?.setUser(userInfo);
         navigation.navigate("BottomBar");
       } catch (error) {
-        console.log((error as Error).message);
+        console.error((error as Error).message);
         if (
           error &&
           (error as Error).message &&
@@ -184,7 +183,7 @@ export default function SignUpScreen() {
             style={styles.input}
             underlineColorAndroid="transparent"
             placeholder={""}
-            placeholderTextColor="white"
+            placeholderTextColor="#f2f2f2"
             autoCapitalize="none"
             value={name}
             onChangeText={(text) => {
@@ -199,12 +198,12 @@ export default function SignUpScreen() {
             style={styles.input}
             underlineColorAndroid="transparent"
             placeholder={""}
-            placeholderTextColor="white"
+            placeholderTextColor="#f2f2f2"
             autoCapitalize="none"
             value={username}
             onChangeText={(text) => {
               setError("");
-              setUsername(text);
+              setUsername(text.toLowerCase());
             }}
           ></TextInput>
         </View>
@@ -277,10 +276,10 @@ export default function SignUpScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     display: "flex",
-    marginTop: 22,
+    marginTop: 26,
     maxWidth: 500,
     minWidth: 300,
   },

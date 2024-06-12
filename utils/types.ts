@@ -6,6 +6,33 @@ export type RootStackParamList = {
   SignUp: undefined;
 };
 
+export type UserType = {
+  id: number;
+  pfp: string;
+  name: string;
+  email: string;
+  password: string;
+  username: string;
+  created_at: string;
+};
+
+export type PostType = {
+  id: number;
+  caption: string;
+  img: string;
+  created_at: string;
+  user_id: number;
+  category: string;
+  ecoquest_user: UserType;
+  liked: boolean;
+};
+
+export type LikeType = {
+  user_id: number;
+  post_id: number;
+  created_at: string;
+};
+
 export type FontAwesomeIconName =
   | "link"
   | "search"

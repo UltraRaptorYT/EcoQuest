@@ -7,11 +7,12 @@ import { RootStackParamList } from "../utils/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("ultraraptorpai@gmail.com");
   const [password, setPassword] = useState("");
   const userContext = useContext(UserContext);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [error, setError] = useState("");
+  const [processing, setProcessing] = useState(false);
 
   async function loginUser(email: string, password: string) {
     const response = await fetch(
@@ -28,7 +29,6 @@ export default function LoginScreen() {
     if (data && "error" in data) {
       throw new Error(data.error);
     }
-    console.log(data);
     if (data.length == 0) {
       throw new Error("Account details are incorrect");
     }
@@ -36,11 +36,14 @@ export default function LoginScreen() {
   }
 
   const onHandleLogin = async () => {
+    if (processing) {
+      return;
+    }
+    setProcessing(true);
     setError("");
     if (email.trim() != "" && password.trim() != "") {
       try {
         const userInfo = await loginUser(email, password);
-        console.log(userInfo);
         userContext?.setUser(userInfo);
         navigation.navigate("BottomBar");
       } catch (error) {
@@ -49,11 +52,12 @@ export default function LoginScreen() {
     } else {
       setError("Email and Password cannot be blank");
     }
+    setProcessing(false);
   };
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
+      <Text style={styles.login}>Login</Text>
       <View style={styles.inputItems}>
         <Text style={styles.subhead}>Email Address</Text>
         <TextInput
@@ -94,10 +98,10 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     display: "flex",
-    marginTop: 22,
+    marginTop: 26,
     maxWidth: 500,
     minWidth: 300,
   },
@@ -112,4 +116,5 @@ const styles = StyleSheet.create({
     textAlign: "left",
     width: 330,
   },
+  login: {},
 });

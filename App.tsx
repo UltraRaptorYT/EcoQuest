@@ -16,6 +16,10 @@ import LoginScreen from "./pages/LoginScreen";
 import SignUpScreen from "./pages/SignUpScreen";
 
 import { UserProvider } from "./context/UserContext";
+import Toast, {
+  BaseToastProps,
+  SuccessToast,
+} from "react-native-toast-message";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -51,6 +55,22 @@ function TabNavigator() {
   );
 }
 
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props: BaseToastProps) => (
+    <SuccessToast
+      {...props}
+      text1Style={{
+        fontSize: 16,
+        fontWeight: "bold",
+      }}
+    />
+  ),
+};
+
 export default function App() {
   return (
     <UserProvider>
@@ -67,6 +87,7 @@ export default function App() {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast config={toastConfig} />
     </UserProvider>
   );
 }

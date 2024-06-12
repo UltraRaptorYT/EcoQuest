@@ -13,16 +13,16 @@ export default function CreatePostScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     flex: 1,
     display: "flex",
-    marginTop: 22,
+    marginTop: 26,
     maxWidth: 500,
     minWidth: 300,
   },
   header: {
     display: "flex",
-    padding: 10,
+    padding: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

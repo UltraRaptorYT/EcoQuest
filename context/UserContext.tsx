@@ -5,11 +5,12 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
+import { UserType } from "../utils/types";
 
 // Define the types for the context value
 interface UserContextType {
-  user: any;
-  setUser: Dispatch<SetStateAction<any>>;
+  user: UserType;
+  setUser: Dispatch<SetStateAction<UserType | null>>;
   // data: any;
   // setData: Dispatch<SetStateAction<any>>;
   // subscription: any[];
