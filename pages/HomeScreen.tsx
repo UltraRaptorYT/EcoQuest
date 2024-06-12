@@ -100,6 +100,10 @@ const HomeScreen = () => {
     }
   }, [modalVisible]);
 
+  useEffect(() => {
+    console.log(userContext);
+  }, []);
+
   async function createPost() {
     if (image?.startsWith("data")) {
       let file = await uriToBlob(image);

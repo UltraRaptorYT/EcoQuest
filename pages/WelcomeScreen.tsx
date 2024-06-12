@@ -9,7 +9,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>EcoQuest</Text>
-      <Button title="Login" onPress={() => navigation.navigate("BottomBar")} />
+      <Button title="Login" onPress={() => navigation.navigate("Login")} />
       <Button title="SignUp" onPress={() => navigation.navigate("SignUp")} />
     </View>
   );

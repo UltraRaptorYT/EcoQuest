@@ -51,7 +51,7 @@ export default function SignUpScreen() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
@@ -75,7 +75,6 @@ export default function SignUpScreen() {
     email: string,
     password: string
   ) {
-    console.log("IDK");
     const response = await fetch(
       "https://e7eg0soi49.execute-api.ap-southeast-1.amazonaws.com/default/supabase_signup",
       {
@@ -93,6 +92,10 @@ export default function SignUpScreen() {
       throw new Error(data.error);
     }
     console.log(data);
+    if (data.length == 0) {
+      throw new Error("Internal Server Error");
+    }
+    return data[0];
   }
 
   const onHandleSignUp = async () => {
@@ -107,8 +110,8 @@ export default function SignUpScreen() {
       error == ""
     ) {
       try {
-        const userinfo = await createUser(username, name, email, password);
-        userContext?.setUser(userinfo);
+        const userInfo = await createUser(username, name, email, password);
+        userContext?.setUser(userInfo);
         navigation.navigate("BottomBar");
       } catch (error) {
         console.log((error as Error).message);
@@ -166,9 +169,9 @@ export default function SignUpScreen() {
     setPasswordStrength(calculatePasswordStrength(text));
   };
 
-  const handleconfirmPasswordChange = (text: string) => {
+  const handleConfirmPasswordChange = (text: string) => {
     setError("");
-    setconfirmPassword(text);
+    setConfirmPassword(text);
     setIsPasswordMatch(password === text);
   };
 
@@ -244,7 +247,7 @@ export default function SignUpScreen() {
             placeholderTextColor="black"
             autoCapitalize="none"
             value={confirmPassword}
-            onChangeText={handleconfirmPasswordChange}
+            onChangeText={handleConfirmPasswordChange}
           />
         </View>
         <View style={styles.line}>

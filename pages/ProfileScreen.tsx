@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../utils/types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { UserContext } from "../context/UserContext";
 
 export default function ProfileScreen() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const userContext = useContext(UserContext);
 
   return (
     <View style={styles.container}>
@@ -14,7 +17,10 @@ export default function ProfileScreen() {
       <Text>ProfilePage </Text>
       <Button
         title="Sign Out"
-        onPress={() => navigation.navigate("Welcome")}
+        onPress={() => {
+          userContext?.setUser(null);
+          navigation.navigate("Welcome");
+        }}
       ></Button>
     </View>
   );
