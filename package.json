@@ -14,7 +14,6 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "@supabase/supabase-js": "^2.43.4",
-    "crypto-browserify": "^3.12.0",
     "expo": "^51.0.13",
     "expo-image-picker": "~15.0.5",
     "expo-status-bar": "~1.12.1",
@@ -30,7 +29,11 @@
     "@babel/core": "^7.20.0",
     "@types/expo__vector-icons": "^10.0.0",
     "@types/react": "~18.2.45",
-    "typescript": "5.3.3"
+    "crypto-browserify": "^3.12.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "5.3.3",
+    "webpack": "^5.92.0",
+    "webpack-cli": "^5.1.4"
   },
   "private": true
 }
