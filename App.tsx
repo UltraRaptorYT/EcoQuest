@@ -2,18 +2,18 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { FontAwesomeIconName } from "./src/utils/types";
-import { RootStackParamList } from "./src/utils/types";
+import { FontAwesomeIconName } from "./utils/types";
+import { RootStackParamList } from "./utils/types";
 
-import WelcomeScreen from "./src/pages/WelcomeScreen";
-import HomeScreen from "./src/pages/HomeScreen";
-import MarketPlaceScreen from "./src/pages/MarketPlaceScreen";
-import QuestScreen from "./src/pages/QuestScreen";
-import ProfileScreen from "./src/pages/ProfileScreen";
-import RecycleScreen from "./src/pages/RecycleScreen";
-import CreatePostScreen from "./src/pages/Post/CreatePostScreen";
+import WelcomeScreen from "./pages/WelcomeScreen";
+import HomeScreen from "./pages/HomeScreen";
+import MarketPlaceScreen from "./pages/MarketPlaceScreen";
+import QuestScreen from "./pages/QuestScreen";
+import ProfileScreen from "./pages/ProfileScreen";
+import RecycleScreen from "./pages/RecycleScreen";
+import CreatePostScreen from "./pages/Post/CreatePostScreen";
 
-import { UserProvider } from "./src/context/UserContext";
+import { UserProvider } from "./context/UserContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
