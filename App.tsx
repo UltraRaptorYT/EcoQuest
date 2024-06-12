@@ -12,6 +12,8 @@ import QuestScreen from "./pages/QuestScreen";
 import ProfileScreen from "./pages/ProfileScreen";
 import RecycleScreen from "./pages/RecycleScreen";
 import CreatePostScreen from "./pages/Post/CreatePostScreen";
+import LoginScreen from "./pages/LoginScreen";
+import SignUpScreen from "./pages/SignUpScreen";
 
 import { UserProvider } from "./context/UserContext";
 
@@ -55,11 +57,14 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Welcome"
+          // initialRouteName="BottomBar"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="BottomBar" component={TabNavigator} />
           <Stack.Screen name="CreatePost" component={CreatePostScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

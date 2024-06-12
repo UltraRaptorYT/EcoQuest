@@ -8,13 +8,13 @@ import {
   TextInput,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import supabase from "../utils/supabase";
 import Post from "../components/Post";
 import { FontAwesome } from "@expo/vector-icons";
 import { RootStackParamList } from "../utils/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-
+import { UserContext } from "../context/UserContext";
 import * as ImagePicker from "expo-image-picker";
 
 type PostType = {
@@ -26,12 +26,14 @@ type PostType = {
 };
 
 const HomeScreen = () => {
+  const userContext = useContext(UserContext);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [posts, setPosts] = useState<PostType[]>();
 
   const [image, setImage] = useState<string | undefined>(undefined);
+  const [caption, setCaption] = useState<string>();
 
   useEffect(() => {
     async function getPost() {
@@ -111,6 +113,8 @@ const HomeScreen = () => {
       }
     }
     console.log(image);
+    console.log(userContext?.user);
+    // supabase.from("ecoquest_post").insert({});
     return;
   }
 
@@ -120,6 +124,8 @@ const HomeScreen = () => {
         <Text style={styles.heading}>EcoQuest</Text>
         <Pressable
           onPress={() => {
+            setCaption("");
+            setImage("");
             setModalVisible(true);
             // navigation.navigate("Quest");
             // navigation.navigate("CreatePost");
@@ -139,15 +145,22 @@ const HomeScreen = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={styles.closeButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
             >
-              <FontAwesome name="times" size={24} color="black" />
+              <FontAwesome name="times" size={16} color="#B0B0B0" />
             </Pressable>
             <Image source={{ uri: image }} style={styles.img} />
-            <TextInput placeholder="Write a caption"></TextInput>
+            <TextInput
+              placeholder="Write a caption"
+              style={styles.textInput}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={(text) => setCaption(text)}
+              value={caption}
+            ></TextInput>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
@@ -195,18 +208,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalView: {
-    margin: 20,
+    // margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
+    // borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
     elevation: 5,
   },
   button: {
@@ -230,8 +243,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   img: {
+    width: 200,
+    aspectRatio: 1,
+    height: 200,
+    margin: "auto",
+  },
+  closeButton: {
+    alignSelf: "flex-start",
+  },
+  textInput: {
     width: "100%",
-    height: 100,
+    padding: 10,
   },
 });
 

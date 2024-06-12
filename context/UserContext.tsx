@@ -10,10 +10,10 @@ import React, {
 interface UserContextType {
   user: any;
   setUser: Dispatch<SetStateAction<any>>;
-  data: any;
-  setData: Dispatch<SetStateAction<any>>;
-  subscription: any[];
-  setSubscription: Dispatch<SetStateAction<any[]>>;
+  // data: any;
+  // setData: Dispatch<SetStateAction<any>>;
+  // subscription: any[];
+  // setSubscription: Dispatch<SetStateAction<any[]>>;
 }
 
 // Create the context with a default value
@@ -27,13 +27,11 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<any>(null);
-  const [data, setData] = useState<any>(null);
-  const [subscription, setSubscription] = useState<any[]>([]);
+  // const [data, setData] = useState<any>(null);
+  // const [subscription, setSubscription] = useState<any[]>([]);
 
   return (
-    <UserContext.Provider
-      value={{ user, setUser, data, setData, subscription, setSubscription }}
-    >
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,12 +1,21 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../utils/types";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export default function ProfileScreen() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.heading}>EcoQuest</Text>
       </View>
       <Text>ProfilePage </Text>
+      <Button
+        title="Sign Out"
+        onPress={() => navigation.navigate("Welcome")}
+      ></Button>
     </View>
   );
 }
