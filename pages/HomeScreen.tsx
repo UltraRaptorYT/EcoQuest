@@ -11,13 +11,10 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import supabase from "../utils/supabase";
 import Post from "../components/Post";
 import { FontAwesome } from "@expo/vector-icons";
-import { RootStackParamList } from "../utils/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { UserContext } from "../context/UserContext";
 import * as ImagePicker from "expo-image-picker";
 import Pill from "../components/Pill";
@@ -28,7 +25,6 @@ import Toast from "react-native-toast-message";
 
 const HomeScreen = () => {
   const userContext = useContext(UserContext);
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [posts, setPosts] = useState<PostType[]>();
@@ -120,7 +116,6 @@ const HomeScreen = () => {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 1,
       });
-
 
       if (!result.canceled) {
         const { uri, fileName } = result.assets[0];

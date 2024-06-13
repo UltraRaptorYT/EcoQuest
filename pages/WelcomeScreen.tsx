@@ -123,9 +123,6 @@ const styles = StyleSheet.create({
   line: {
     width: "200%",
     height: 0,
-    // borderColor: "black",
-    // borderWidth: 7.5,
-    // borderStyle: "dotted",
     transform: [{ rotate: "-16.5deg" }],
     position: "absolute",
     left: -20,

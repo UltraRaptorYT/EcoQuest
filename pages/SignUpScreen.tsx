@@ -1,10 +1,19 @@
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TextInput,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../utils/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import ProgressLine from "../components/ProgessLine";
+import DottedLine from "../components/DottedLine";
 
 function validatePassword(password: string) {
   // minimum 8 characters
@@ -176,7 +185,19 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={{ alignItems: "center", marginTop: 80 }}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Sign Up</Text>
+        <View style={styles.titleContainerBefore}></View>
+        <View style={styles.line}>
+          <DottedLine
+            length={600}
+            dotSize={7.5}
+            dotSpacing={5}
+            dotColor="black"
+          />
+        </View>
+      </View>
+      <ScrollView style={styles.formContainer}>
         <View style={styles.inputItems}>
           <Text style={styles.subhead}>Name</Text>
           <TextInput
@@ -249,7 +270,7 @@ export default function SignUpScreen() {
             onChangeText={handleConfirmPasswordChange}
           />
         </View>
-        <View style={styles.line}>
+        <View style={styles.passwordLine}>
           <ProgressLine progress={passwordStrength} />
         </View>
         {passwordError !== "" && (
@@ -259,17 +280,28 @@ export default function SignUpScreen() {
         {!isPasswordMatch && (
           <Text style={styles.errorMsg}>Passwords do not match</Text>
         )}
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <Button title="Register" onPress={onHandleSignUp}></Button>
-        <Text style={{ marginTop: 30, marginBottom: 40 }}>
-          Do you have already an account?
-        </Text>
-        <Button
-          title="Login"
-          onPress={() => navigation.navigate("Login")}
-        ></Button>
-      </View>
+        <Pressable
+          style={[styles.button, styles.loginBtn]}
+          onPress={onHandleSignUp}
+        >
+          <Text style={styles.buttonText}>Register</Text>
+        </Pressable>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+            justifyContent: "center",
+            marginTop: 50,
+          }}
+        >
+          <Text>Do you have already an account?</Text>
+          <Pressable onPress={() => navigation.navigate("Login")}>
+            <Text style={styles.link}>Login</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -282,13 +314,38 @@ const styles = StyleSheet.create({
     marginTop: 26,
     maxWidth: 500,
     minWidth: 300,
+    height: "100%",
   },
   subhead: {
-    color: "#6E548C",
+    color: "#696969",
+    fontSize: 16,
   },
-  inputItems: {},
-  input: {},
-  line: {
+  formContainer: {
+    padding: 30,
+    gap: 25,
+  },
+  inputItems: { gap: 10 },
+  input: {
+    borderWidth: 3.5,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontSize: 16,
+    borderRadius: 999,
+  },
+  errorMsg: {
+    color: "red",
+    margin: 10,
+    textAlign: "left",
+    width: 330,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#f2f2f2",
+  },
+  passwordLine: {
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -297,10 +354,51 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  errorMsg: {
-    color: "red",
-    margin: 10,
-    textAlign: "left",
-    width: 330,
+  titleContainer: {
+    backgroundColor: "#1DD1A1",
+    paddingTop: 50,
+    paddingBottom: 125,
+    position: "relative",
   },
+  titleContainerBefore: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    width: 0,
+    height: 0,
+    borderTopWidth: 150, // Height of the triangle
+    borderTopColor: "transparent",
+    borderRightWidth: 500, // Width of the triangle
+    borderRightColor: "#f2f2f2", // Color of the triangle
+    borderStyle: "solid", // Style of the border
+    backgroundColor: "transparent", // Set the background color to transparent
+  },
+  button: {
+    borderWidth: 3,
+    borderColor: "black",
+    fontWeight: "bold",
+    padding: 10,
+    borderRadius: 9999,
+    width: 200,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  buttonText: {
+    fontWeight: "bold",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  loginBtn: {
+    backgroundColor: "#95D5B2",
+  },
+  line: {
+    width: "200%",
+    height: 0,
+    transform: [{ rotate: "-16.5deg" }],
+    position: "absolute",
+    left: -20,
+    bottom: 110,
+  },
+  link: { color: "#04b182", textDecorationLine: "underline" },
 });

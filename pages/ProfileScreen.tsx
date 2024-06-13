@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../utils/types";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -14,13 +14,17 @@ export default function ProfileScreen() {
       <View style={styles.header}>
         <Text style={styles.heading}>EcoQuest</Text>
       </View>
-      <Text>Hi {JSON.stringify(userContext?.user)},</Text>
-      <Button
-        title="Sign Out"
-        onPress={() => {
-          navigation.navigate("Welcome");
-        }}
-      ></Button>
+      <View style={styles.contentContainer}>
+        <Text style={styles.hi}>Hi {userContext?.user.name}!</Text>
+        <Pressable
+          style={[styles.button, styles.loginBtn]}
+          onPress={() => {
+            navigation.navigate("Welcome");
+          }}
+        >
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -44,5 +48,29 @@ const styles = StyleSheet.create({
   heading: {
     fontWeight: "bold",
     fontSize: 20,
+  },
+  button: {
+    borderWidth: 3,
+    borderColor: "black",
+    fontWeight: "bold",
+    padding: 10,
+    borderRadius: 9999,
+    width: 200,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  loginBtn: {
+    backgroundColor: "#95D5B2",
+  },
+  buttonText: {
+    fontWeight: "bold",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  contentContainer: {
+    padding: 15,
+  },
+  hi: {
+    fontSize: 18,
   },
 });
